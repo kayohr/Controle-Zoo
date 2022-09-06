@@ -1,5 +1,6 @@
 const data = require('../data/zoo_data');
-const { species, prices, entrants } = require('../data/zoo_data');
+
+const { prices } = require('../data/zoo_data');
 
 function countEntrants(entrants) {
   const objeto = {};
@@ -13,25 +14,16 @@ function countEntrants(entrants) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === '') {
+  // https://programandosolucoes.dev.br/2021/03/02/objeto-vazio-javascript/#:~:text=O%20Javascript%20n%C3%A3o%20consegue%20comparar,comparar%20os%20dois%20retornar%C3%A1%20sucesso.
+  if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
-  return countEntrants(entrants).child;
-//fazer forEach e smando e retornar em um
-
-  //(.child * prices.child) + (adult * prices.adult) + (senior * prices.senior);
-  //countEntrants(entrants).child * entrants.child +  countEntrants(entrants).adult * entrants.adult + countEntrants(entrants).senior * entrants.senior
-
+  const sum = countEntrants(entrants);
+  const childs = sum.child * prices.child;
+  const adults = sum.adult * prices.adult;
+  const senior = sum.senior * prices.senior;
+  const final = (childs + adults + senior);
+  return final;
 }
-console.log(calculateEntry());
 
 module.exports = { calculateEntry, countEntrants };
-
-/* const entrants = [
-	{ name:  'Lara Carvalho', age:  5 },
-	{ name:  'Frederico Moreira', age:  5 },
-	{ name:  'Pedro Henrique Carvalho', age:  5 },
-	{ name:  'Maria Costa', age:  18 },
-	{ name:  'Núbia Souza', age:  18 },
-	{ name:  'Carlos Nogueira', age:  50 },
-]; */
