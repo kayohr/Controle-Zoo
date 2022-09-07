@@ -24,3 +24,9 @@ it('A hora deve representar um número', () => {
 it('As atas devem representar um número', () => {
   expect(() => getOpeningHours('Sunday', '09:c0-AM')).toThrowError('The minutes should represent a number');
 });
+it('', () => {
+  expect(() => getOpeningHours('Wednesday', '13:00-AM')).toThrowError('The hour must be between 0 and 12');
+});
+it('', () => {
+  expect(() => getOpeningHours('Wednesday', '00:61-AM')).toThrowError('The minutes must be between 0 and 59');
+});
